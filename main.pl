@@ -1,11 +1,15 @@
-% Base de Hechos
-% jugador(Rol, Nombre, Ataque, Defensa, Velocidad)
-jugador(medio, 'Sergio Busquets', 90, 85, 88).
-jugador(defensa, 'Sergio Ramos', 85, 80, 90).
-jugador(delantero, 'David Villa', 88, 82, 85).
-jugador(delantero, 'Fernando Torres', 87, 83, 87).
-jugador(delantero, 'Pedro Rodriguez', 87, 84, 90).
-jugador(medio, 'Andres Iniesta', 92, 85, 90).
-jugador(medio, 'Xavi Hernandez', 91, 86, 89).
-jugador(portero, 'Iker Casillas', 85, 75, 88).
-jugador(defensa, 'Gerard Pique', 84, 78, 86).
+% Cargar los datos de jugadores
+:- consult('datos_jugadores.pl').
+
+% Reglas para determinar si un jugador es diestro o zurdo
+es_diestro :- not(es_zurdo).
+
+% Regla para calcular el promedio de goles por partido
+goles_promedio(Jugador, GolesTemporada, PartidosJugados, Promedio) :-
+    PartidosJugados > 0, % Evitar división por cero
+    Promedio is GolesTemporada / PartidosJugados.
+
+% Regla para calcular el promedio de asistencias por partido
+asistencias_promedio(Jugador, Asistencias, PartidosJugados, Promedio) :-
+    PartidosJugados > 0, % Evitar división por cero
+    Promedio is Asistencias / PartidosJugados.
