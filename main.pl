@@ -13,3 +13,5 @@ goles_promedio(Jugador, GolesTemporada, PartidosJugados, Promedio) :-
 asistencias_promedio(Jugador, Asistencias, PartidosJugados, Promedio) :-
     PartidosJugados > 0, % Evitar división por cero
     Promedio is Asistencias / PartidosJugados.
+
+    
