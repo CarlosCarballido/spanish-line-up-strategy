@@ -1,18 +1,4 @@
 % Definición de jugadores
-% es_portero(Nombre, GolesTemporada, Asistencias, Regates, Recuperaciones, Tiros_totales, Pases_totales, Pases_completados, Pases_clave, Intercepciones, Tarjetas_amarillas, Tarjetas_rojas, Minutos_jugados, Partidos_jugados, Goles_pp, Goles_encajados, Penaltis, Penaltis_parados).
-es_jugador('Unai Simon', 0, 0, 0, 0, 0, 0, 300, 0, 0, 0, 0, 1603, 17, 0, 7, 2, 1).
-es_jugador('Robert Sánchez', 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 17, 1, 0, 1, 1, 0).
-es_jugador('David De Gea', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).
-es_jugador('Iñaki Peña', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).
-es_jugador('Josep Martinez', 0, 1, 2, 5, 8, 200, 17, 4, 3, 0, 0, 23, 1, 0, 2, 0, 0).
-es_jugador('Alvaro Fernandez', 0, 2, 5, 12, 6, 180, 150, 7, 4, 1, 0, 670, 8, 0, 4, 1, 0).
-
-promedio(Jugador, Promedio):-
-    es_portero(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, Goles_encajados, _, _),
-    Partidos_jugados > 0, % Evitar división por cero
-    Promedio_Goles_Encajados is Goles_encajados / Partidos_jugados,
-
-
 
 % es_jugador(Nombre, GolesTemporada, Asistencias, Regates, Recuperaciones, Tiros_totales, Pases_totales, Pases_completados, Pases_clave, Intercepciones, Tarjetas_amarillas, Tarjetas_rojas, Minutos_jugados, Partidos_jugados, Goles_pp, Goles_encajados, Penaltis, Penaltis_parados).
 es_jugador('Unai Simon', 0, 0, 0, 0, 0, 0, 300, 0, 0, 0, 0, 1603, 17, 0, 7, 2, 1).
@@ -161,3 +147,10 @@ es_zurdo('Gerard Moreno')
 es_zurdo('Rodrigo')
 es_zurdo('Pablo Sarabia')
 es_zurdo('Mikel Oyarzabal').
+
+
+promedio(Jugador, Promedio):-
+    es_portero(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, Goles_encajados, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Goles_Encajados is Goles_encajados / Partidos_jugados,
+    
