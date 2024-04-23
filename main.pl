@@ -9,39 +9,6 @@ es_defensa :- es_li; es_ld; es_dfc.
 es_mediocentro:- es_mc; es_mcd; es_mco.
 es_delantero:- es_dc; es_ed; es_ei.
 
-% Regla para determinar el promedio de minutos por partido
-minutos_promedio(Jugador, MinutosJugados, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is MinutosJugados / PartidosJugados.
-
-% Regla para calcular el promedio de goles por partido
-goles_promedio(Jugador, GolesTemporada, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is GolesTemporada / PartidosJugados.
-
-% Regla para calcular el promedio de Asistencias por partido
-asistencias_promedio(Jugador, Asistencias, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Asistencias / PartidosJugados.
-
-% Regla para calcular el promedio de Regates por partido
-regates_promedio(Jugador, Regates, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Regates / PartidosJugados.
-
-% Regla para calcular el promedio de Recuperaciones ganados por partido
-duelos_ganados_promedio(Jugador, Recuperaciones, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Recuperaciones / PartidosJugados.
-
-
-
-
-
-
-
-
-
 
 
 % Regla para calcular el ranking de porteros
