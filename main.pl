@@ -34,59 +34,13 @@ duelos_ganados_promedio(Jugador, Recuperaciones, PartidosJugados, Promedio) :-
     PartidosJugados > 0, % Evitar división por cero
     Promedio is Recuperaciones / PartidosJugados.
 
-% Regla para calcular el promedio de pases por partido
-pases_promedio(Jugador, Pases_totales, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Pases_totales / PartidosJugados.
 
-% Regla para calcular el promedio de pases completados por partido
-pases_completados_promedio(Jugador, Pases_completados, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Pases_completados / PartidosJugados.
 
-% Regla para calcular el promedio de Pases_clave por partido
-pases_clave_promedio(Jugador, Pases_clave, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Pases_clave / PartidosJugados.
 
-% Regla para calcular el promedio de Intercepciones por partido
-intercepciones_promedio(Jugador, Intercepciones, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Intercepciones / PartidosJugados.
 
-% Regla para calcular el promedio de Tarjetas_amarillas por partido
-tarjetas_amarillas_promedio(Jugador, Tarjetas_amarillas, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Tarjetas_amarillas / PartidosJugados.
 
-% Regla para calcular el promedio de Tarjetas_rojas por partido
-tarjetas_rojas_promedio(Jugador, Tarjetas_rojas, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Tarjetas_rojas / PartidosJugados.
 
-% Regla para calcular el promedio de Goles_encajados por partido
-goles_encajados_promedio(Jugador, Goles_encajados, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Goles_encajados / PartidosJugados.
 
-% Regla para calcular el promedio de Penaltis_parados por partido
-penaltis_parados_promedio(Jugador, Penaltis_parados, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Penaltis_parados / PartidosJugados.
-
-% Regla para calcular el promedio de Goles_pp por partido
-goles_pp_promedio(Jugador, Goles_pp, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Goles_pp / PartidosJugados.
-
-% Regla para calcular el promedio de Penaltis por partido
-penaltis_promedio(Jugador, Penaltis, PartidosJugados, Promedio) :-
-    PartidosJugados > 0, % Evitar división por cero
-    Promedio is Penaltis / PartidosJugados.
-
-rp(Jugador, Goles_encajados, Penaltis_promedio, Penaltis_parados_promedio, Duelos_ganados_promedio, Partidos_jugados):-
-    Goles_encajados(Jugador, Goles_encajados, PartidosJugados, Promedio),
-    
 
 
 

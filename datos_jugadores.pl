@@ -63,94 +63,105 @@ es_jugador('Mikel Oyarzabal', 2, 2, 6, 12, 8, 230, 200, 7, 6, 1, 0, 1200, 13, 0,
 es_jugador('Yeremi Pino', 0, 1, 3, 9, 6, 200, 170, 5, 5, 1, 0, 800, 9, 0, 0, 0 , 0).
 
 % Definición de posiciones
-es_portero('Unai Simon')
-es_portero('Robert Sánchez')
-es_portero('David De Gea')
-es_portero('Iñaki Peña')
-es_portero('Josep Martinez')
-es_portero('Alvaro Fernandez')
-es_dfc('Jorge Cuenca')
-es_dfc('Eric Garcia')
-es_dfc('Hugo Guillamon')
-es_dfc('Raul Albiol')
-es_dfc('Diego Llorente')
-es_dfc('Aymeric Laporte')
-es_dfc('Iñigo Martínez')
-es_dfc('Sergio Ramos')
-es_dfc('Pau Torres')
-es_ld('Oscar Gil')
-es_ld('Pedro Porro')
-es_ld('Cesar Azpilicueta')
-es_ld('Dani Carvajal')
-es_ld('Oscar Mingueza')
-es_ld('Sergi Roberto')
-es_li('Jordi Alba')
-es_li('José Luis Gaya')
-es_li('Marcos Alonso')
-es_li('Juan Miranda')
-es_li('Sergio Reguilon')
-es_mcd('Antonio Blanco')
-es_mcd('Sergio Busquets')
-es_mcd('Rodri')
-es_mc('Fran Beltran')
-es_mc('Gavi')
-es_mc('Gonzalo Villar')
-es_mcd('Martín Zubimendi')
-es_mc('Marcos Llorente')
-es_mc('Mikel Merino')
-es_mc('Fabian Ruiz')
-es_mc('Thiago Alcantara')
-es_mc('Marc Cucurella')
-es_ed('Bryan Gil')
-es_mc('Koke Resurreccion')
-es_mco('Manu Garcia')
-es_mco('Brais Mendez')
-es_ed('Alejandro Pozo')
-es_mco('Pablo Fornals')
-es_mco('Dani Olmo')
-es_mc('Pedri')
-es_mc('Carlos Soler')
-es_ei('Ferran Torres')
-es_mco('Sergio Canales')
-es_mco('Brahim Diaz')
-es_dc('Raul De Tomas')
-es_dc('Gerard Moreno')
-es_dc('Álvaro Morata')
-es_dc('Rodrigo')
-es_dc('Abel Ruiz')
-es_ed('Pablo Sarabia')
-es_ed('Adama Traore')
-es_ei('Javi Puado')
-es_ei('Mikel Oyarzabal')
-es_ed('Yeremi Pino')
+es_portero('Unai Simon').
+es_portero('Robert Sánchez').
+es_portero('David De Gea').
+es_portero('Iñaki Peña').
+es_portero('Josep Martinez').
+es_portero('Alvaro Fernandez').
+es_dfc('Jorge Cuenca').
+es_dfc('Eric Garcia').
+es_dfc('Hugo Guillamon').
+es_dfc('Raul Albiol').
+es_dfc('Diego Llorente').
+es_dfc('Aymeric Laporte').
+es_dfc('Iñigo Martínez').
+es_dfc('Sergio Ramos').
+es_dfc('Pau Torres').
+es_ld('Oscar Gil').
+es_ld('Pedro Porro').
+es_ld('Cesar Azpilicueta').
+es_ld('Dani Carvajal').
+es_ld('Oscar Mingueza').
+es_ld('Sergi Roberto').
+es_li('Jordi Alba').
+es_li('José Luis Gaya').
+es_li('Marcos Alonso').
+es_li('Juan Miranda').
+es_li('Sergio Reguilon').
+es_mcd('Antonio Blanco').
+es_mcd('Sergio Busquets').
+es_mcd('Rodri').
+es_mc('Fran Beltran').
+es_mc('Gavi').
+es_mc('Gonzalo Villar').
+es_mcd('Martín Zubimendi').
+es_mc('Marcos Llorente').
+es_mc('Mikel Merino').
+es_mc('Fabian Ruiz').
+es_mc('Thiago Alcantara').
+es_mc('Marc Cucurella').
+es_ed('Bryan Gil').
+es_mc('Koke Resurreccion').
+es_mco('Manu Garcia').
+es_mco('Brais Mendez').
+es_ed('Alejandro Pozo').
+es_mco('Pablo Fornals').
+es_mco('Dani Olmo').
+es_mc('Pedri').
+es_mc('Carlos Soler').
+es_ei('Ferran Torres').
+es_mco('Sergio Canales').
+es_mco('Brahim Diaz').
+es_dc('Raul De Tomas').
+es_dc('Gerard Moreno').
+es_dc('Álvaro Morata').
+es_dc('Rodrigo').
+es_dc('Abel Ruiz').
+es_ed('Pablo Sarabia').
+es_ed('Adama Traore').
+es_ei('Javi Puado').
+es_ei('Mikel Oyarzabal').
+es_ed('Yeremi Pino').
 
 %TODO: Completar los que son zurdos 
 % Definicion de pie dominante
-es_zurdo('Jorge Cuenca')
-es_zurdo('Aymeric Laporte')
-es_zurdo('Iñigo Martínez')
-es_zurdo('Pau Torres')
-es_zurdo('Oscar Gil')
-es_zurdo('Jordi Alba')
-es_zurdo('José Luis Gaya')
-es_zurdo('Marcos Alonso')
-es_zurdo('Juan Miranda')
-es_zurdo('Sergio Reguilon')
-es_zurdo('Mikel Merino')
-es_zurdo('Fabian Ruiz')
-es_zurdo('Marc Cucurella')
-es_zurdo('Bryan Gil')
-es_zurdo('Brais Mendez')
-es_zurdo('Sergio Canales')
-es_zurdo('Brahim Diaz')
-es_zurdo('Gerard Moreno')
-es_zurdo('Rodrigo')
-es_zurdo('Pablo Sarabia')
+es_zurdo('Jorge Cuenca').
+es_zurdo('Aymeric Laporte').
+es_zurdo('Iñigo Martínez').
+es_zurdo('Pau Torres').
+es_zurdo('Oscar Gil').
+es_zurdo('Jordi Alba').
+es_zurdo('José Luis Gaya').
+es_zurdo('Marcos Alonso').
+es_zurdo('Juan Miranda').
+es_zurdo('Sergio Reguilon').
+es_zurdo('Mikel Merino').
+es_zurdo('Fabian Ruiz').
+es_zurdo('Marc Cucurella').
+es_zurdo('Bryan Gil').
+es_zurdo('Brais Mendez').
+es_zurdo('Sergio Canales').
+es_zurdo('Brahim Diaz').
+es_zurdo('Gerard Moreno').
+es_zurdo('Rodrigo').
+es_zurdo('Pablo Sarabia').
 es_zurdo('Mikel Oyarzabal').
 
 
-promedio(Jugador, Promedio):-
-    es_portero(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, Goles_encajados, _, _),
+promedio(Jugador, Promedio_Goles_Encajados,Promedio_Penaltis,Promedio_Penaltis_Parados):-
+    es_jugador(Jugador,_,_,_,_,_,Pases_totales,Pases_completados,Pases_clave,Intercepciones,Tarjetas_amarillas,Tarjetas_rojas,_, Partidos_jugados, Goles_pp, Goles_encajados, Penaltis, Penaltis_parados),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Goles_Encajados is Goles_encajados / Partidos_jugados,
+    Promedio_Penaltis_Parados is Penaltis_parados / Partidos_jugados,
+    Promedio_Penaltis is Penaltis / Partidos_jugados,
+    Promedio_Goles_Pp is Goles_pp / Partidos_jugados,
+    Promedio_Tarjetas_Amarillas is Tarjetas_amarillas / Partidos_jugados,
+    Promedio_Tarjetas_Rojas is Tarjetas_rojas / Partidos_jugados,
+    Promedio_Intercepciones is Intercepciones / Partidos_jugados,
+    Promedio_Pases_Clave is Pases_clave / Partidos_jugados,
+    Promedio_Pases_Completados is Pases_completados / Partidos_jugados,
+    Promedio_Pases is Pases_totales / Partidos_jugados,
     
+
+
