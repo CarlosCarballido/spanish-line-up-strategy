@@ -149,25 +149,75 @@ es_zurdo('Pablo Sarabia').
 es_zurdo('Mikel Oyarzabal').
 
 
-promedio(Jugador, Promedio_Asistencias, Promedio_Regates, Promedio_Duelos_Ganados, Promedio_Goles_Acertados, Promedio_Pases,Promedio_Pases_Completados,Promedio_Pases_Clave, Promedio_Intercepciones, Promedio_Tarjetas_Amarillas, Promedio_Tarjetas_Rojas,Promedio_Goles_Pp, Promedio_Goles_Encajados, Promedio_Penaltis, Promedio_Penaltis_Parados, Promedio_Minutos_por_Partido):-
-    es_jugador(Jugador,GolesTemporada,Asistencias,Regates,Recuperaciones,Tiros_totales,Pases_totales,Pases_completados,Pases_clave,Intercepciones,Tarjetas_amarillas,Tarjetas_rojas,Minutos_jugados, Partidos_jugados, Goles_pp, Goles_encajados, Penaltis, Penaltis_parados),
-    Partidos_jugados > 0, % Evitar división por cero
 
-    Promedio_Asistencias is Asistencias / Partidos_jugados,
-    Promedio_Regates is Regates / Partidos_jugados,
-    Promedio_Duelos_Ganados is Recuperaciones / Partidos_jugados,
-    Promedio_Goles_Acertados is GolesTemporada / Tiros_totales,
-    Promedio_Pases is Pases_totales / Partidos_jugados,
-    Promedio_Pases_Completados is Pases_completados / Partidos_jugados,
-    Promedio_Pases_Clave is Pases_clave / Partidos_jugados,
-    Promedio_Intercepciones is Intercepciones / Partidos_jugados,
-    Promedio_Tarjetas_Amarillas is Tarjetas_amarillas / Partidos_jugados,
-    Promedio_Tarjetas_Rojas is Tarjetas_rojas / Partidos_jugados,
-    Promedio_Goles_Pp is Goles_pp / Partidos_jugados,
-    Promedio_Goles_Encajados is Goles_encajados / Partidos_jugados,
-    Promedio_Penaltis is Penaltis / Partidos_jugados,
-    Promedio_Penaltis_Parados is Penaltis_parados / Partidos_jugados,
+promedio_portero_goles_encajados(Jugador, Promedio_Goles_Encajados):-
+    es_portero(Jugador), % Comprobamos si es portero
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,Minutos_jugados,Partidos_jugados, _, Goles_encajados, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Goles_Encajados is Goles_encajados / Minutos_jugados.
+
+promedio_portero_penaltis_parados(Jugador, Promedio_Penaltis_Parados):-
+    es_portero(Jugador), % Comprobamos si es portero
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, Penaltis, Penaltis_parados),
+    Partidos_jugados > 0, % Evitar división por cero    
+    Promedio_Penaltis_Parados is Penaltis / Penaltis_parados.
+
+promedio_tarjetas_rojas(Jugador, Promedio_Tarjetas_Rojas):-
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,Tarjetas_rojas,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Tarjetas_Rojas is Tarjetas_rojas / Minutos_jugados.
+
+
+promedio_tarjetas_amarillas(Jugador,Promedio_Tarjetas_Amarillas):-
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,Tarjetas_amarillas,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Tarjetas_Amarillas is Tarjetas_amarillas / Minutos_jugados.
+
+promedio_intercepciones(Jugador, Promedio_Intercepciones):-
+    es_jugador(Jugador,_,_,_,_,_,_,_,Intercepciones,_,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Intercepciones is Intercepciones / Minutos_jugados.
+
+promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
+    es_jugador(Jugador,_,_,_,_,Pases_totales,_,Pases_clave,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Pases_Clave is Pases_clave / Pases_totales.
+
+promedio_pases_completados(Jugador, Promedio_Pases_Completados):-
+    es_jugador(Jugador,_,_,_,_,Pases_totales,Pases_completados,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Pases_Completados is Pases_completados / Pases_totales.
+
+promedio_asistencias(Jugador, Promedio_Asistencias):-
+    es_jugador(Jugador,_,Asistencias,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Asistencias is Asistencias / Partidos_jugados.
+
+promedio_regates(Jugador, Promedio_Regates):- 
+    es_jugador(Jugador,_,_,Regates,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Regates is Regates / Partidos_jugados.
+
+promedio_duelos_ganados(Jugador, Promedio_Duelos_Ganados):- 
+    es_jugador(Jugador,_,_,_,Duelos_Ganados,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Duelos_Ganados is Duelos_Ganados / Partidos_jugados.
+
+promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):- 
+    es_jugador(Jugador,GolesTemporada,_,_,_,Tiros_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Goles_Acertados is GolesTemporada / Tiros_totales.
+
+promedio_pases(Jugador, Promedio_Pases):- 
+    es_jugador(Jugador,_,_,_,_,Pases_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
+    Promedio_Pases is Pases_totales / Partidos_jugados.
+
+promedio_minutos_por_partido(Jugador, Promedio_Minutos_por_Partido):- 
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    Partidos_jugados > 0, % Evitar división por cero
     Promedio_Minutos_por_Partido is Minutos_jugados / Partidos_jugados.
-        
+
+
 
 
