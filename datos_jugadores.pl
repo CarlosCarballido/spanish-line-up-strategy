@@ -156,11 +156,14 @@ promedio_portero_goles_encajados(Jugador, Promedio_Goles_Encajados):-
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Goles_Encajados is Goles_encajados / Minutos_jugados.
 
+
 promedio_portero_penaltis_parados(Jugador, Promedio_Penaltis_Parados):-
     es_portero(Jugador), % Comprobamos si es portero
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, Penaltis, Penaltis_parados),
     Partidos_jugados > 0, % Evitar división por cero    
+    Penaltis_parados > 0, % Evitar división por cero    
     Promedio_Penaltis_Parados is Penaltis / Penaltis_parados.
+
 
 promedio_tarjetas_rojas(Jugador, Promedio_Tarjetas_Rojas):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,Tarjetas_rojas,Minutos_jugados, Partidos_jugados, _, _, _, _),
@@ -168,56 +171,219 @@ promedio_tarjetas_rojas(Jugador, Promedio_Tarjetas_Rojas):-
     Promedio_Tarjetas_Rojas is Tarjetas_rojas / Minutos_jugados.
 
 
+
 promedio_tarjetas_amarillas(Jugador,Promedio_Tarjetas_Amarillas):-
-    es_jugador(Jugador,_,_,_,_,_,_,_,_,Tarjetas_amarillas,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,Tarjetas_amarillas,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Tarjetas_Amarillas is Tarjetas_amarillas / Minutos_jugados.
 
+
+
 promedio_intercepciones(Jugador, Promedio_Intercepciones):-
-    es_jugador(Jugador,_,_,_,_,_,_,_,Intercepciones,_,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_,_,_,_, Intercepciones,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Intercepciones is Intercepciones / Minutos_jugados.
 
+
 promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
-    es_jugador(Jugador,_,_,_,_,Pases_totales,_,Pases_clave,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_, Pases_totales,_,Pases_clave,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Pases_Clave is Pases_clave / Pases_totales.
 
+
+
 promedio_pases_completados(Jugador, Promedio_Pases_Completados):-
-    es_jugador(Jugador,_,_,_,_,Pases_totales,Pases_completados,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_, Pases_totales, Pases_completados,_,_,_,_,_, Partidos_jugados, _, _ , _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Pases_Completados is Pases_completados / Pases_totales.
 
+
 promedio_asistencias(Jugador, Promedio_Asistencias):-
-    es_jugador(Jugador,_,Asistencias,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_, Asistencias, _,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Asistencias is Asistencias / Partidos_jugados.
 
+
 promedio_regates(Jugador, Promedio_Regates):- 
-    es_jugador(Jugador,_,_,Regates,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,Regates,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Regates is Regates / Partidos_jugados.
 
+
 promedio_duelos_ganados(Jugador, Promedio_Duelos_Ganados):- 
-    es_jugador(Jugador,_,_,_,Duelos_Ganados,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,Duelos_Ganados, _,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Duelos_Ganados is Duelos_Ganados / Partidos_jugados.
 
+
+
 promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):- 
-    es_jugador(Jugador,GolesTemporada,_,_,_,Tiros_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,GolesTemporada,_,_,_,Tiros_totales,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Goles_Acertados is GolesTemporada / Tiros_totales.
 
+
+
 promedio_pases(Jugador, Promedio_Pases):- 
-    es_jugador(Jugador,_,_,_,_,Pases_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_,Pases_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Pases is Pases_totales / Partidos_jugados.
 
+
+
 promedio_minutos_por_partido(Jugador, Promedio_Minutos_por_Partido):- 
-    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
+    es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Minutos_por_Partido is Minutos_jugados / Partidos_jugados.
 
 
 
+ranking_porteros(PorterosRanking) :-
+    findall(Puntuacion-Jugador, (es_portero(Jugador),
+                                  promedio_portero_goles_encajados(Jugador, PromedioGolesEncajados),
+                                  promedio_portero_penaltis_parados(Jugador, PromedioPenaltisParados),
+                                  promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
+                                  promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+                                  promedio_intercepciones(Jugador, PromedioIntercepciones),
+                                  Puntuacion is PromedioPenaltisParados - PromedioGolesEncajados - PromedioTarjetasRojas - PromedioTarjetasAmarillas + PromedioIntercepciones
+                                 ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, PorterosRanking).
 
+presentar_ranking_porteros :-
+    writeln('Ranking de mejores porteros:'),
+    ranking_porteros(PorterosRanking),
+    forall(member(Puntuacion-Jugador, PorterosRanking),
+           format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion])).
+
+
+ranking_defensas(DefensasRanking) :-
+    findall(Puntuacion-Jugador, (es_dfc(Jugador),
+                                  promedio_intercepciones(Jugador, PromedioIntercepciones),
+                                  promedio_pases_clave(Jugador, PromedioPasesClave),
+                                  promedio_pases_completados(Jugador, PromedioPasesCompletados),
+                                  promedio_asistencias(Jugador, PromedioAsistencias),
+                                  promedio_regates(Jugador, PromedioRegates),
+                                  promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+                                  Puntuacion is PromedioIntercepciones + PromedioPasesClave + PromedioPasesCompletados + PromedioAsistencias + PromedioRegates + PromedioDuelosGanados
+                                 ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, DefensasRanking).
+
+presentar_ranking_defensas :-
+    writeln('Ranking de mejores defensas:'),
+    ranking_defensas(DefensasRanking),
+    forall(member(Puntuacion-Jugador, DefensasRanking),
+           format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion])).
+
+
+
+ranking_defensas(DefensasRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_dfc(Jugador), Tipo = 'Centro',
+              calcular_puntuacion_dfc(Jugador, Puntuacion)
+            ;
+              es_ld(Jugador), Tipo = 'Lateral derecho',
+              calcular_puntuacion_ld(Jugador, Puntuacion)
+            ;
+              es_li(Jugador), Tipo = 'Lateral izquierdo',
+              calcular_puntuacion_li(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, DefensasRanking).
+
+calcular_puntuacion_dfc(Jugador, Puntuacion) :-
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_pases_clave(Jugador, PromedioPasesClave),
+    promedio_pases_completados(Jugador, PromedioPasesCompletados),
+    % Aquí puedes definir la fórmula de puntuación para los defensas centrales
+    Puntuacion is PromedioIntercepciones * 0.4 +
+                  PromedioDuelosGanados * 0.3 +
+                  PromedioPasesClave * 0.2 +
+                  PromedioPasesCompletados * 0.1.
+
+calcular_puntuacion_ld(Jugador, Puntuacion) :-
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_pases_clave(Jugador, PromedioPasesClave),
+    promedio_pases_completados(Jugador, PromedioPasesCompletados),
+    % Aquí puedes definir la fórmula de puntuación para los defensas laterales derechos
+    Puntuacion is PromedioIntercepciones * 0.3 +
+                  PromedioDuelosGanados * 0.2 +
+                  PromedioPasesClave * 0.3 +
+                  PromedioPasesCompletados * 0.2.
+
+calcular_puntuacion_li(Jugador, Puntuacion) :-
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_pases_clave(Jugador, PromedioPasesClave),
+    promedio_pases_completados(Jugador, PromedioPasesCompletados),
+    % Aquí puedes definir la fórmula de puntuación para los defensas laterales izquierdos
+    Puntuacion is PromedioIntercepciones * 0.3 +
+                  PromedioDuelosGanados * 0.3 +
+                  PromedioPasesClave * 0.1 +
+                  PromedioPasesCompletados * 0.3.
+
+presentar_ranking_defensas :-
+    writeln('Ranking de mejores defensas:'),
+    ranking_defensas(DefensasRanking),
+    forall(member(Puntuacion-Tipo-Jugador, DefensasRanking),
+           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
+
+ranking_mediocentros(MediocentrosRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_mc(Jugador), Tipo = 'Mediocentro central',
+              calcular_puntuacion_mc(Jugador, Puntuacion)
+            ;
+              es_mcd(Jugador), Tipo = 'Mediocentro defensivo',
+              calcular_puntuacion_mcd(Jugador, Puntuacion)
+            ;
+              es_mco(Jugador), Tipo = 'Mediocentro ofensivo',
+              calcular_puntuacion_mco(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, MediocentrosRanking).
+
+calcular_puntuacion_mc(Jugador, Puntuacion) :-
+    promedio_pases_clave(Jugador, PromedioPasesClave),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    % Aquí puedes definir la fórmula de puntuación para los mediocentros centrales
+    Puntuacion is PromedioPasesClave * 0.4 +
+                  PromedioRegates * 0.2 +
+                  PromedioGolesAcertados * 0.2 +
+                  PromedioIntercepciones * 0.2.
+
+calcular_puntuacion_mcd(Jugador, Puntuacion) :-
+    promedio_pases_completados(Jugador, PromedioPasesCompletados),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    % Aquí puedes definir la fórmula de puntuación para los mediocentros defensivos
+    Puntuacion is PromedioPasesCompletados * 0.3 +
+                  PromedioRegates * 0.1 +
+                  PromedioGolesAcertados * 0.1 +
+                  PromedioIntercepciones * 0.5.
+
+calcular_puntuacion_mco(Jugador, Puntuacion) :-
+    promedio_pases_clave(Jugador, PromedioPasesClave),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_intercepciones(Jugador, PromedioIntercepciones),
+    % Aquí puedes definir la fórmula de puntuación para los mediocentros ofensivos
+    Puntuacion is PromedioPasesClave * 0.2 +
+                  PromedioRegates * 0.3 +
+                  PromedioGolesAcertados * 0.4 +
+                  PromedioIntercepciones * 0.1.
+
+presentar_ranking_mediocentros :-
+    writeln('Ranking de mejores mediocentros:'),
+    ranking_mediocentros(MediocentrosRanking),
+    forall(member(Puntuacion-Tipo-Jugador, MediocentrosRanking),
+           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
