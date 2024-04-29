@@ -251,32 +251,13 @@ ranking_porteros(PorterosRanking) :-
     keysort(ListaPuntuaciones, ListaOrdenada),
     reverse(ListaOrdenada, PorterosRanking).
 
+
 presentar_ranking_porteros :-
     writeln('Ranking de mejores porteros:'),
     ranking_porteros(PorterosRanking),
     forall(member(Puntuacion-Jugador, PorterosRanking),
            format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion])).
 
-
-ranking_defensas(DefensasRanking) :-
-    findall(Puntuacion-Jugador, (es_dfc(Jugador),
-                                  promedio_intercepciones(Jugador, PromedioIntercepciones),
-                                  promedio_pases_clave(Jugador, PromedioPasesClave),
-                                  promedio_pases_completados(Jugador, PromedioPasesCompletados),
-                                  promedio_asistencias(Jugador, PromedioAsistencias),
-                                  promedio_regates(Jugador, PromedioRegates),
-                                  promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
-                                  Puntuacion is PromedioIntercepciones + PromedioPasesClave + PromedioPasesCompletados + PromedioAsistencias + PromedioRegates + PromedioDuelosGanados
-                                 ),
-            ListaPuntuaciones),
-    keysort(ListaPuntuaciones, ListaOrdenada),
-    reverse(ListaOrdenada, DefensasRanking).
-
-presentar_ranking_defensas :-
-    writeln('Ranking de mejores defensas:'),
-    ranking_defensas(DefensasRanking),
-    forall(member(Puntuacion-Jugador, DefensasRanking),
-           format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion])).
 
 
 
@@ -300,33 +281,42 @@ calcular_puntuacion_dfc(Jugador, Puntuacion) :-
     promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
     promedio_pases_clave(Jugador, PromedioPasesClave),
     promedio_pases_completados(Jugador, PromedioPasesCompletados),
-    % Aquí puedes definir la fórmula de puntuación para los defensas centrales
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioIntercepciones * 0.4 +
                   PromedioDuelosGanados * 0.3 +
                   PromedioPasesClave * 0.2 +
-                  PromedioPasesCompletados * 0.1.
+                  PromedioPasesCompletados * 0.1 -
+                  PromedioTarjetasAmarillas * 0.3 -
+                  PromedioTarjetasRojas * 0.3.
 
 calcular_puntuacion_ld(Jugador, Puntuacion) :-
     promedio_intercepciones(Jugador, PromedioIntercepciones),
     promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
     promedio_pases_clave(Jugador, PromedioPasesClave),
     promedio_pases_completados(Jugador, PromedioPasesCompletados),
-    % Aquí puedes definir la fórmula de puntuación para los defensas laterales derechos
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioIntercepciones * 0.3 +
                   PromedioDuelosGanados * 0.2 +
                   PromedioPasesClave * 0.3 +
-                  PromedioPasesCompletados * 0.2.
+                  PromedioPasesCompletados * 0.2-
+                  PromedioTarjetasAmarillas * 0.3 -
+                  PromedioTarjetasRojas * 0.3.
 
 calcular_puntuacion_li(Jugador, Puntuacion) :-
     promedio_intercepciones(Jugador, PromedioIntercepciones),
     promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
     promedio_pases_clave(Jugador, PromedioPasesClave),
     promedio_pases_completados(Jugador, PromedioPasesCompletados),
-    % Aquí puedes definir la fórmula de puntuación para los defensas laterales izquierdos
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioIntercepciones * 0.3 +
                   PromedioDuelosGanados * 0.3 +
                   PromedioPasesClave * 0.1 +
-                  PromedioPasesCompletados * 0.3.
+                  PromedioPasesCompletados * 0.3 -
+                  PromedioTarjetasAmarillas * 0.3 -
+                  PromedioTarjetasRojas * 0.3.
 
 presentar_ranking_defensas :-
     writeln('Ranking de mejores defensas:'),
@@ -354,36 +344,111 @@ calcular_puntuacion_mc(Jugador, Puntuacion) :-
     promedio_regates(Jugador, PromedioRegates),
     promedio_goles_acertados(Jugador, PromedioGolesAcertados),
     promedio_intercepciones(Jugador, PromedioIntercepciones),
-    % Aquí puedes definir la fórmula de puntuación para los mediocentros centrales
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioPasesClave * 0.4 +
                   PromedioRegates * 0.2 +
                   PromedioGolesAcertados * 0.2 +
-                  PromedioIntercepciones * 0.2.
+                  PromedioIntercepciones * 0.2-
+                  PromedioTarjetasAmarillas * 0.2 -
+                  PromedioTarjetasRojas * 0.2.
 
 calcular_puntuacion_mcd(Jugador, Puntuacion) :-
     promedio_pases_completados(Jugador, PromedioPasesCompletados),
     promedio_regates(Jugador, PromedioRegates),
     promedio_goles_acertados(Jugador, PromedioGolesAcertados),
     promedio_intercepciones(Jugador, PromedioIntercepciones),
-    % Aquí puedes definir la fórmula de puntuación para los mediocentros defensivos
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioPasesCompletados * 0.3 +
                   PromedioRegates * 0.1 +
                   PromedioGolesAcertados * 0.1 +
-                  PromedioIntercepciones * 0.5.
+                  PromedioIntercepciones * 0.5 -
+                  PromedioTarjetasAmarillas * 0.2 -
+                  PromedioTarjetasRojas * 0.2.
 
 calcular_puntuacion_mco(Jugador, Puntuacion) :-
     promedio_pases_clave(Jugador, PromedioPasesClave),
     promedio_regates(Jugador, PromedioRegates),
     promedio_goles_acertados(Jugador, PromedioGolesAcertados),
     promedio_intercepciones(Jugador, PromedioIntercepciones),
-    % Aquí puedes definir la fórmula de puntuación para los mediocentros ofensivos
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
     Puntuacion is PromedioPasesClave * 0.2 +
                   PromedioRegates * 0.3 +
                   PromedioGolesAcertados * 0.4 +
-                  PromedioIntercepciones * 0.1.
+                  PromedioIntercepciones * 0.1-
+                  PromedioTarjetasAmarillas * 0.2 -
+                  PromedioTarjetasRojas * 0.2.
 
 presentar_ranking_mediocentros :-
     writeln('Ranking de mejores mediocentros:'),
     ranking_mediocentros(MediocentrosRanking),
     forall(member(Puntuacion-Tipo-Jugador, MediocentrosRanking),
            format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
+
+
+ranking_delanteros(DelanterosRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_dc(Jugador), Tipo = 'Delantero centro',
+              calcular_puntuacion_dc(Jugador, Puntuacion)
+            ;
+              es_ed(Jugador), Tipo = 'Extremo derecho',
+              calcular_puntuacion_ed(Jugador, Puntuacion)
+            ;
+              es_ei(Jugador), Tipo = 'Extremo izquierdo',
+              calcular_puntuacion_ei(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, DelanterosRanking).
+
+calcular_puntuacion_dc(Jugador, Puntuacion) :-
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_pases(Jugador, PromedioPases),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
+    Puntuacion is PromedioGolesAcertados * 0.5 +
+                  PromedioRegates * 0.2 +
+                  PromedioPases * 0.1 +
+                  PromedioDuelosGanados * 0.2-
+                  PromedioTarjetasAmarillas * 0.1 -
+                  PromedioTarjetasRojas * 0.1.
+
+calcular_puntuacion_ed(Jugador, Puntuacion) :-  
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_pases(Jugador, PromedioPases),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
+    Puntuacion is PromedioGolesAcertados * 0.3 +
+                  PromedioRegates * 0.3 +
+                  PromedioPases * 0.2 +
+                  PromedioDuelosGanados * 0.2-
+                  PromedioTarjetasAmarillas * 0.1 -
+                  PromedioTarjetasRojas * 0.1.
+
+calcular_puntuacion_ei(Jugador, Puntuacion) :-
+    promedio_goles_acertados(Jugador, PromedioGolesAcertados),
+    promedio_regates(Jugador, PromedioRegates),
+    promedio_pases(Jugador, PromedioPases),
+    promedio_duelos_ganados(Jugador, PromedioDuelosGanados),
+    promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+    promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
+    Puntuacion is PromedioGolesAcertados * 0.3 +
+                  PromedioRegates * 0.3 +
+                  PromedioPases * 0.2 +
+                  PromedioDuelosGanados * 0.2 -
+                  PromedioTarjetasAmarillas * 0.1 -
+                  PromedioTarjetasRojas * 0.1.
+
+presentar_ranking_delanteros :- 
+    writeln('Ranking de mejores delanteros:'),
+    ranking_delanteros(DelanterosRanking),
+    forall(member(Puntuacion-Tipo-Jugador, DelanterosRanking),
+           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
+
+%TODO: Falta revisar si hay algun promedio mas que aplicar a los rankings
