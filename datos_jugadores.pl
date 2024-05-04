@@ -252,13 +252,16 @@ ranking_porteros(PorterosRanking) :-
     reverse(ListaOrdenada, PorterosRanking).
 
 
-presentar_ranking_porteros :-
+presentar_ranking_porteros(N):-
     writeln('Ranking de mejores porteros:'),
     ranking_porteros(PorterosRanking),
-    forall(member(Puntuacion-Jugador, PorterosRanking),
-           format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion])).
+    length(PorterosRanking, Length),
+    LengthToShow is min(Length, N),
+    forall(between(1, LengthToShow, I),
+           (nth1(I, PorterosRanking, Puntuacion-Jugador),
+            format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion]))).
 
-
+%TODO solo imprime 1 portero
 
 
 ranking_defensas(DefensasRanking) :-
@@ -318,11 +321,15 @@ calcular_puntuacion_li(Jugador, Puntuacion) :-
                   PromedioTarjetasAmarillas * 0.3 -
                   PromedioTarjetasRojas * 0.3.
 
-presentar_ranking_defensas :-
+
+presentar_ranking_defensas(N):-
     writeln('Ranking de mejores defensas:'),
     ranking_defensas(DefensasRanking),
-    forall(member(Puntuacion-Tipo-Jugador, DefensasRanking),
-           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
+    length(DefensasRanking, Length),
+    LengthToShow is min(Length, N),
+    forall(between(1, LengthToShow, I),
+           (nth1(I, DefensasRanking, Puntuacion-Tipo-Jugador),
+            format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion]))).
 
 ranking_mediocentros(MediocentrosRanking) :-
     findall(Puntuacion-Tipo-Jugador,
@@ -381,12 +388,14 @@ calcular_puntuacion_mco(Jugador, Puntuacion) :-
                   PromedioTarjetasAmarillas * 0.2 -
                   PromedioTarjetasRojas * 0.2.
 
-presentar_ranking_mediocentros :-
+presentar_ranking_mediocentros(N):-
     writeln('Ranking de mejores mediocentros:'),
     ranking_mediocentros(MediocentrosRanking),
-    forall(member(Puntuacion-Tipo-Jugador, MediocentrosRanking),
-           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
-
+    length(MediocentrosRanking, Length),
+    LengthToShow is min(Length, N),
+    forall(between(1, LengthToShow, I),
+           (nth1(I, MediocentrosRanking, Puntuacion-Tipo-Jugador),
+            format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion]))).
 
 ranking_delanteros(DelanterosRanking) :-
     findall(Puntuacion-Tipo-Jugador,
@@ -445,10 +454,14 @@ calcular_puntuacion_ei(Jugador, Puntuacion) :-
                   PromedioTarjetasAmarillas * 0.1 -
                   PromedioTarjetasRojas * 0.1.
 
-presentar_ranking_delanteros :- 
+presentar_ranking_delanteros(N):-
     writeln('Ranking de mejores delanteros:'),
     ranking_delanteros(DelanterosRanking),
-    forall(member(Puntuacion-Tipo-Jugador, DelanterosRanking),
-           format('~w - Tipo: ~w - Puntuacion: ~2f~n', [Jugador, Tipo, Puntuacion])).
+    length(DelanterosRanking, Length),
+    LengthToShow is min(Length, N),
+    forall(between(1, LengthToShow, I),
+           (nth1(I, DelanterosRanking, Puntuacion-Jugador),
+            format('~w - Puntuacion: ~2f~n', [Jugador, Puntuacion]))).
+
 
 %TODO: Falta revisar si hay algun promedio mas que aplicar a los rankings
