@@ -1,10 +1,10 @@
 % Definición de jugadores
 
 % es_jugador(Nombre, GolesTemporada, Asistencias, Regates, Recuperaciones, Tiros_totales, Pases_totales, Pases_completados, Pases_clave, Intercepciones, Tarjetas_amarillas, Tarjetas_rojas, Minutos_jugados, Partidos_jugados, Goles_pp, Goles_encajados, Penaltis, Penaltis_parados).
+es_jugador('David De Gea', 0, 0, 0, 0, 0, 0, 220, 0, 3, 1, 0, 2430, 27, 0, 35, 3, 1).
+es_jugador('Iñaki Peña', 0, 0, 0, 0, 0, 0, 50, 0, 1, 0, 0, 540, 6, 0, 8, 0, 0).
 es_jugador('Unai Simon', 0, 0, 0, 0, 0, 0, 300, 0, 0, 0, 0, 1603, 17, 0, 7, 2, 1).
 es_jugador('Robert Sánchez', 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 17, 1, 0, 1, 1, 0).
-es_jugador('David De Gea', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).
-es_jugador('Iñaki Peña', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).
 es_jugador('Josep Martinez', 0, 1, 2, 5, 8, 200, 17, 4, 3, 0, 0, 23, 1, 0, 2, 0, 0).
 es_jugador('Alvaro Fernandez', 0, 2, 5, 12, 6, 180, 150, 7, 4, 1, 0, 670, 8, 0, 4, 1, 0).
 es_jugador('Jorge Cuenca', 0, 1, 3, 9, 5, 150, 120, 6, 5, 0, 0, 630, 7, 0, 0, 0 , 0).
