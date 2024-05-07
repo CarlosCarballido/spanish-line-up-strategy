@@ -33,7 +33,7 @@ es_jugador('Rodri', 0, 3, 7, 14, 9, 250, 220, 8, 6, 1, 0, 1700, 17, 0, 0, 0 , 0)
 es_jugador('Fran Beltran', 0, 1, 3, 8, 6, 190, 160, 4, 4, 0, 0, 600, 7, 0, 0, 0 , 0).
 es_jugador('Gavi', 0, 2, 6, 12, 8, 230, 200, 7, 6, 0, 0, 1200, 13, 0, 0, 0 , 0).
 es_jugador('Gonzalo Villar', 0, 1, 3, 9, 6, 200, 170, 5, 5, 0, 0, 700, 8, 0, 0, 0 , 0).
-es_jugador('Martín Zubimendi', 0, 2, 6, 11, 8, 220, 190, 6, 5, 0, 0, 800, 9, 0, 0, 0 , 0).
+es_jugador('Martin Zubimendi', 0, 2, 6, 11, 8, 220, 190, 6, 5, 0, 0, 800, 9, 0, 0, 0 , 0).
 es_jugador('Marcos Llorente', 0, 3, 7, 13, 9, 240, 210, 8, 7, 0, 0, 1400, 15, 0, 0, 0 , 0).
 es_jugador('Mikel Merino', 0, 2, 6, 12, 8, 230, 200, 7, 6, 0, 0, 900, 10, 0, 0, 0 , 0).
 es_jugador('Fabian Ruiz', 0, 2, 6, 12, 8, 230, 200, 6, 6, 0, 0, 800, 9, 0, 0, 0 , 0).
@@ -124,7 +124,7 @@ es_ei('Javi Puado').
 es_ei('Mikel Oyarzabal').
 es_ed('Yeremi Pino').
 
-%TODO: Completar los que son zurdos 
+
 % Definicion de pie dominante
 es_zurdo('Jorge Cuenca').
 es_zurdo('Aymeric Laporte').
@@ -148,12 +148,14 @@ es_zurdo('Rodrigo').
 es_zurdo('Pablo Sarabia').
 es_zurdo('Mikel Oyarzabal').
 
+es_diestro(Jugador) :- not(es_zurdo(Jugador)).
 
 
 promedio_portero_goles_encajados(Jugador, Promedio_Goles_Encajados):-
     es_portero(Jugador), % Comprobamos si es portero
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,Minutos_jugados,Partidos_jugados, _, Goles_encajados, _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Goles_encajados > 0 , 
     Promedio_Goles_Encajados is Goles_encajados / Minutos_jugados.
 
 
@@ -182,12 +184,14 @@ promedio_tarjetas_amarillas(Jugador,Promedio_Tarjetas_Amarillas):-
 promedio_intercepciones(Jugador, Promedio_Intercepciones):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_, Intercepciones,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Minutos_jugados > 0,
     Promedio_Intercepciones is Intercepciones / Minutos_jugados.
 
 
 promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
     es_jugador(Jugador,_,_,_,_,_, Pases_totales,_,Pases_clave,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Pases_totales > 0,
     Promedio_Pases_Clave is Pases_clave / Pases_totales.
 
 
@@ -195,6 +199,7 @@ promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
 promedio_pases_completados(Jugador, Promedio_Pases_Completados):-
     es_jugador(Jugador,_,_,_,_,_, Pases_totales, Pases_completados,_,_,_,_,_, Partidos_jugados, _, _ , _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Pases_totales > 0 ,
     Promedio_Pases_Completados is Pases_completados / Pases_totales.
 
 
@@ -220,6 +225,7 @@ promedio_duelos_ganados(Jugador, Promedio_Duelos_Ganados):-
 promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):- 
     es_jugador(Jugador,GolesTemporada,_,_,_,Tiros_totales,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Tiros_totales > 0, 
     Promedio_Goles_Acertados is GolesTemporada / Tiros_totales.
 
 
@@ -227,6 +233,7 @@ promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):-
 promedio_pases(Jugador, Promedio_Pases):- 
     es_jugador(Jugador,_,_,_,_,_,Pases_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
+    Pases_totales > 0 ,
     Promedio_Pases is Pases_totales / Partidos_jugados.
 
 
@@ -235,6 +242,51 @@ promedio_minutos_por_partido(Jugador, Promedio_Minutos_por_Partido):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Minutos_por_Partido is Minutos_jugados / Partidos_jugados.
+
+
+
+ranking_porteros(PorterosRanking) :-
+    findall(Puntuacion-Jugador, (es_portero(Jugador),
+                                  promedio_portero_goles_encajados(Jugador, PromedioGolesEncajados),
+                                  promedio_portero_penaltis_parados(Jugador, PromedioPenaltisParados),
+                                  promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
+                                  promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
+                                  promedio_intercepciones(Jugador, PromedioIntercepciones),
+                                  Puntuacion is PromedioPenaltisParados - PromedioGolesEncajados - PromedioTarjetasRojas - PromedioTarjetasAmarillas + PromedioIntercepciones
+                                 ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, PorterosRanking),
+    format_output_portero(PorterosRanking).
+
+format_output_portero([]).
+format_output_portero([Puntuacion-Jugador|Resto]) :-
+    format("~2f - ~s~n", [Puntuacion, Jugador]),
+    format_output_portero(Resto).
+
+
+
+
+ranking_defensas(DefensasRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_dfc(Jugador), Tipo = 'Centro',
+              calcular_puntuacion_dfc(Jugador, Puntuacion)
+            ;
+              es_ld(Jugador), Tipo = 'Lateral derecho',
+              calcular_puntuacion_ld(Jugador, Puntuacion)
+            ;
+              es_li(Jugador), Tipo = 'Lateral izquierdo',
+              calcular_puntuacion_li(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, DefensasRanking),
+    format_output(DefensasRanking).
+
+format_output([]).
+format_output([Puntuacion-Tipo-Jugador|Resto]) :-
+    format("~2f - ~s - ~s~n", [Puntuacion, Tipo, Jugador]),
+    format_output(Resto).
 
 
 
@@ -282,6 +334,27 @@ calcular_puntuacion_li(Jugador, Puntuacion) :-
                   PromedioTarjetasRojas * 0.3.
 
 
+ranking_mediocentros(MediocentrosRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_mc(Jugador), Tipo = 'Mediocentro central',
+              calcular_puntuacion_mc(Jugador, Puntuacion)
+            ;
+              es_mcd(Jugador), Tipo = 'Mediocentro defensivo',
+              calcular_puntuacion_mcd(Jugador, Puntuacion)
+            ;
+              es_mco(Jugador), Tipo = 'Mediocentro ofensivo',
+              calcular_puntuacion_mco(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, MediocentrosRanking),
+    format_output(MediocentrosRanking).
+
+format_output([]).
+format_output([Puntuacion-Tipo-Jugador|Resto]) :-
+    format("~2f - ~s - ~s~n", [Puntuacion, Tipo, Jugador]),
+    format_output(Resto).
+
 
 calcular_puntuacion_mc(Jugador, Puntuacion) :-
     promedio_pases_clave(Jugador, PromedioPasesClave),
@@ -325,6 +398,26 @@ calcular_puntuacion_mco(Jugador, Puntuacion) :-
                   PromedioTarjetasAmarillas * 0.2 -
                   PromedioTarjetasRojas * 0.2.
 
+ranking_delanteros(DelanterosRanking) :-
+    findall(Puntuacion-Tipo-Jugador,
+            ( es_dc(Jugador), Tipo = 'Delantero centro ',
+              calcular_puntuacion_dc(Jugador, Puntuacion)
+            ;
+              es_ed(Jugador), Tipo = 'Extremo derecho',
+              calcular_puntuacion_ed(Jugador, Puntuacion)
+            ;
+              es_ei(Jugador), Tipo = 'Extremo izquierdo',
+              calcular_puntuacion_ei(Jugador, Puntuacion)
+            ),
+            ListaPuntuaciones),
+    keysort(ListaPuntuaciones, ListaOrdenada),
+    reverse(ListaOrdenada, DelanterosRanking),
+    format_output(DelanterosRanking).
+
+format_output([]).
+format_output([Puntuacion-Tipo-Jugador|Resto]) :-
+    format("~2f - ~s - ~s~n", [Puntuacion, Tipo, Jugador]),
+    format_output(Resto).
 
 calcular_puntuacion_dc(Jugador, Puntuacion) :-
     promedio_goles_acertados(Jugador, PromedioGolesAcertados),
@@ -339,6 +432,7 @@ calcular_puntuacion_dc(Jugador, Puntuacion) :-
                   PromedioDuelosGanados * 0.2-
                   PromedioTarjetasAmarillas * 0.1 -
                   PromedioTarjetasRojas * 0.1.
+
 
 calcular_puntuacion_ed(Jugador, Puntuacion) :-  
     promedio_goles_acertados(Jugador, PromedioGolesAcertados),
@@ -367,30 +461,3 @@ calcular_puntuacion_ei(Jugador, Puntuacion) :-
                   PromedioDuelosGanados * 0.2 -
                   PromedioTarjetasAmarillas * 0.1 -
                   PromedioTarjetasRojas * 0.1.
-
-( es_portero(X) -> calcular_puntuacion_portero(X, Puntuacion) ).
-    calcular_puntuacion_portero(X, Puntuacion) :-
-        promedio_portero_goles_encajados(Jugador, PromedioGolesEncajados),
-        promedio_portero_penaltis_parados(Jugador, PromedioPenaltisParados),
-        promedio_tarjetas_amarillas(Jugador, PromedioTarjetasAmarillas),
-        promedio_tarjetas_rojas(Jugador, PromedioTarjetasRojas),
-        Puntuacion is PromedioGolesEncajados * 0.4 +
-                    PromedioPenaltisParados * 0.3 -
-                    PromedioTarjetasAmarillas * 0.1 -
-                    PromedioTarjetasRojas * 0.2.
-    puntuaciones_porteros = [Puntuacion | puntuaciones_porteros]
-
-ranking_porteros(puntuaciones_porteros, puntuaciones_ordenadas_porteros):-
-    sort(puntuaciones_porteros, puntuaciones_ordenadas_porteros).
-
-
-"""imprimir_ranking_porteros(Porteros, Puntuaciones):-
-    ranking_porteros(Porteros, Puntuaciones),
-    write('Ranking de porteros:'),
-    foreach(member(Puntuacion, Puntuaciones), 
-            (nth0(Index, Puntuaciones, Puntuacion), 
-             nth0(Index, Porteros, Portero),
-             format('~w: ~w~n', [Portero, Puntuacion]))).
-"""
-
-
