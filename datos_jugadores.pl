@@ -151,14 +151,16 @@ es_zurdo('Mikel Oyarzabal').
 es_diestro(Jugador) :- not(es_zurdo(Jugador)).
 
 
+% Calcular promedio de goles encajados de los porteros  
 promedio_portero_goles_encajados(Jugador, Promedio_Goles_Encajados):-
     es_portero(Jugador), % Comprobamos si es portero
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,Minutos_jugados,Partidos_jugados, _, Goles_encajados, _, _),
     Partidos_jugados > 0, % Evitar división por cero
-    Goles_encajados > 0 , 
+    Goles_encajados > 0 ,
+    Minutos_jugados > 0, 
     Promedio_Goles_Encajados is Goles_encajados / Minutos_jugados.
 
-
+% Calcular promedio de penaltis parados de los porteros
 promedio_portero_penaltis_parados(Jugador, Promedio_Penaltis_Parados):-
     es_portero(Jugador), % Comprobamos si es portero
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, Penaltis, Penaltis_parados),
@@ -167,27 +169,28 @@ promedio_portero_penaltis_parados(Jugador, Promedio_Penaltis_Parados):-
     Promedio_Penaltis_Parados is Penaltis / Penaltis_parados.
 
 
+% Calcular promedio de tarjetas rojas de los jugadores
 promedio_tarjetas_rojas(Jugador, Promedio_Tarjetas_Rojas):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,Tarjetas_rojas,Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Tarjetas_Rojas is Tarjetas_rojas / Minutos_jugados.
 
 
-
+% Calcular promedio de tarjetas amarillas de los jugadores
 promedio_tarjetas_amarillas(Jugador,Promedio_Tarjetas_Amarillas):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,Tarjetas_amarillas,_,Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Tarjetas_Amarillas is Tarjetas_amarillas / Minutos_jugados.
 
 
-
+% Calcular promedio de intercepciones de los jugadores
 promedio_intercepciones(Jugador, Promedio_Intercepciones):-
     es_jugador(Jugador,_,_,_,_,_,_,_,_, Intercepciones,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Minutos_jugados > 0,
     Promedio_Intercepciones is Intercepciones / Minutos_jugados.
 
-
+% Calcular promedio de pases clave de los jugadores
 promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
     es_jugador(Jugador,_,_,_,_,_, Pases_totales,_,Pases_clave,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
@@ -195,33 +198,33 @@ promedio_pases_clave(Jugador, Promedio_Pases_Clave):-
     Promedio_Pases_Clave is Pases_clave / Pases_totales.
 
 
-
+% Calcular promedio de pases completados de los jugadores
 promedio_pases_completados(Jugador, Promedio_Pases_Completados):-
     es_jugador(Jugador,_,_,_,_,_, Pases_totales, Pases_completados,_,_,_,_,_, Partidos_jugados, _, _ , _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Pases_totales > 0 ,
     Promedio_Pases_Completados is Pases_completados / Pases_totales.
 
-
+% Calcular promedio de asistencias de los jugadores
 promedio_asistencias(Jugador, Promedio_Asistencias):-
     es_jugador(Jugador,_, Asistencias, _,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Asistencias is Asistencias / Partidos_jugados.
 
-
+% Calcular promedio de regates de los jugadores
 promedio_regates(Jugador, Promedio_Regates):- 
     es_jugador(Jugador,_,_,Regates,_,_,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Regates is Regates / Partidos_jugados.
 
-
+% Calcular promedio de duelos ganados de los jugadores
 promedio_duelos_ganados(Jugador, Promedio_Duelos_Ganados):- 
     es_jugador(Jugador,_,_,_,Duelos_Ganados, _,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Duelos_Ganados is Duelos_Ganados / Partidos_jugados.
 
 
-
+% Calcular promedio de goles acertados de los jugadores
 promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):- 
     es_jugador(Jugador,GolesTemporada,_,_,_,Tiros_totales,_,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
@@ -229,7 +232,7 @@ promedio_goles_acertados(Jugador, Promedio_Goles_Acertados):-
     Promedio_Goles_Acertados is GolesTemporada / Tiros_totales.
 
 
-
+% Calcular promedio de pases por partido de los jugadores
 promedio_pases(Jugador, Promedio_Pases):- 
     es_jugador(Jugador,_,_,_,_,_,Pases_totales,_,_,_,_,_,_, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
@@ -237,14 +240,16 @@ promedio_pases(Jugador, Promedio_Pases):-
     Promedio_Pases is Pases_totales / Partidos_jugados.
 
 
-
+% Calcular promedio de minutos por partido de los jugadores
 promedio_minutos_por_partido(Jugador, Promedio_Minutos_por_Partido):- 
     es_jugador(Jugador,_,_,_,_,_,_,_,_,_,_,_, Minutos_jugados, Partidos_jugados, _, _, _, _),
     Partidos_jugados > 0, % Evitar división por cero
     Promedio_Minutos_por_Partido is Minutos_jugados / Partidos_jugados.
 
 
-
+% Calculamos la puntuación de cada portero en base a los siguientes parámetros: 
+% para el cálculo de la puntuación final utilizamos la siguiente fórmula:
+% Puntuacion = PromedioPenaltisParados - PromedioGolesEncajados - PromedioTarjetasRojas - PromedioTarjetasAmarillas + PromedioIntercepciones
 ranking_porteros(PorterosRanking) :-
     findall(Puntuacion-Jugador, (es_portero(Jugador),
                                   promedio_portero_goles_encajados(Jugador, PromedioGolesEncajados),
